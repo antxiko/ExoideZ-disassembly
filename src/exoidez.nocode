@@ -1,0 +1,11 @@
+# Zonas que NO son codigo aunque el trazado pueda entrar en ellas.
+
+# La cabecera: "AB", INIT, STATEMENT, DEVICE, TEXT y seis reservados.
+0x4000 0x4010
+
+# La tabla de las 23 tareas (0x4096).
+0x40B7 0x40E5
+
+# Las tablas de 0x6990 y 0x6C74, cinco direcciones cada una.
+0x69A2 0x69AC
+0x6C86 0x6C90
