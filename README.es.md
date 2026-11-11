@@ -2,7 +2,7 @@
 
 *(Also [in English](README.md).)*
 
-El desensamblado comentado de **Exoide-Z** (伊賀忍法帖, Casio, 1985) para MSX: un cartucho de 16 KB en 0x4000.
+El desensamblado comentado de **Exoide-Z** (Casio, 1986) para MSX: un cartucho de 16 KB en 0x4000.
 
 - **100 %** del binario explicado: 9.611 bytes de código y 6.773 de datos con nombre, ni un byte sin asignar.
 - **40,4 %** del listado comentado, 487 rutinas y etiquetas, ninguna por debajo del 10 % de comentarios.

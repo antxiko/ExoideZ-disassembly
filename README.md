@@ -2,7 +2,7 @@
 
 *(También [en castellano](README.es.md).)*
 
-The commented disassembly of **Exoide-Z** (伊賀忍法帖, Casio, 1985) for the MSX: a 16 KB cartridge at 0x4000.
+The commented disassembly of **Exoide-Z** (Casio, 1986) for the MSX: a 16 KB cartridge at 0x4000.
 
 - **100%** of the binary explained: 9,611 bytes of code and 6,773 of named data, not one byte unassigned.
 - **40.4%** of the listing commented, 487 routines and labels, none below 10% of comments.
