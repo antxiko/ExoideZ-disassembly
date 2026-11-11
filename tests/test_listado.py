@@ -129,9 +129,10 @@ class ElRecuento(unittest.TestCase):
     def test_los_premios(self):
         rom = lee()
         tramos = [(rom[0x7513 - ORG + 9 * k], rom[0x7516 - ORG + 9 * k:0x751C - ORG + 9 * k].decode())
-                  for k in range(6)]
+                  for k in range(7)]
         self.assertEqual(tramos, [(50, "     0"), (60, "  5000"), (70, " 10000"), (80, " 15000"),
-                                  (90, " 20000"), (100, " 30000")])
+                                  (90, " 20000"), (100, " 30000"), (100, "100000")])
+        self.assertEqual(instruccion(0x7486), "ld b,006h")    # el bucle mira seis: el 100 % cae en el septimo
 
 
 class LaNave(unittest.TestCase):

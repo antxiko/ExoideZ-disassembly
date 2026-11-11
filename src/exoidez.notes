@@ -166,7 +166,7 @@ L 0x7944 vram_relleno              B veces A en la VRAM
 C 0x7944 espera
 C 0x7948 A al puerto de datos
 D 0x794D 0x7B8D sprites_casillas    Dibujos de sprites (los de 0x7834 y 0x78D8) y de casillas, en bytes
-C 0x78BC 0xE000-0xE090 (0x7FAE)
+C 0x78BC la pieza de la RAM (0x7FAE)
 L 0x7B8D sonido_calla              El PSG callado: los registros 13 a 0 a cero y el 7 (la mezcla) a 0xB8
 C 0x7B8D 14 registros
 C 0x7B8F a 0
@@ -336,18 +336,18 @@ L 0x7E4D musica_baja_va
 D 0x7E51 0x7E99 tonos               Los periodos del tono de las 36 notas (0x357 la mas grave ... 0x71)
 F 0x7E51 w12
 D 0x7E99 0x7FAA musicas_datos       Las listas de piezas (0x0000 al final de cada pieza, 0xFFFF al final) y las notas: parejas (duracion, nota)
-D 0x7FAA 0x7FAE fondo_valores       Cuatro valores (5, 3, 1, 3) para los cuatro grupos de 0x7FAE
-L 0x7FAE ram_e000                  0xE000-0xE08F: cuatro grupos de 18 parejas (1, v), v de 0x7FAA; y 0xE090 = 0
-C 0x7FAE los cuatro valores
+D 0x7FAA 0x7FAE redoble_notas       Las cuatro notas (5, 3, 1, 3) de los cuatro grupos de 0x7FAE
+L 0x7FAE redoble_pon               Una pieza de musica hecha en la RAM (0xE000): cuatro grupos de 18 notas de un cuadro (duracion 1, la nota de 0x7FAA) y el 0 del final; la lista 0x7FC7 la toca
+C 0x7FAE las cuatro notas
 C 0x7FB1 desde 0xE000
 C 0x7FB4 cuatro grupos
 C 0x7FB7 de 18
-C 0x7FB9 el valor del grupo
-L 0x7FBB ram_e000_pareja
-C 0x7FBB 1...
-C 0x7FBE ...y el valor
-C 0x7FC5 0xE090 = 0
-D 0x7FC7 0x8000 datos_final         Mas listas de piezas de musica y el final del cartucho a 0xFF
+C 0x7FB9 la nota del grupo
+L 0x7FBB redoble_nota
+C 0x7FBB duracion 1...
+C 0x7FBE ...y la nota
+C 0x7FC5 0: el final de la pieza
+D 0x7FC7 0x8000 musica_lista2       La lista de piezas de la segunda voz (0x7FC7: 0x7FD3, 0x7F2D... y 0xE000, la pieza de la RAM), mas notas y el final del cartucho a 0xFF
 L 0x40E5 presentacion              La presentacion: la pantalla en blanco, los dibujos de las casillas (0x43CD), y cuatro CASIO que entran por los lados y por arriba y abajo hasta juntarse en el centro (0xE211 de 1 a 20, un paso cada 3 cuadros)
 C 0x40E5 0xE0CE = 0
 C 0x40E9 0xE0CD = 4
@@ -1813,7 +1813,7 @@ L 0x7466 recuento_unidades
 L 0x747B recuento_por_ciento
 C 0x747B "%"
 C 0x7480 la tabla de premios
-C 0x7486 6 tramos
+C 0x7486 6 tramos: con el 100 %, el septimo
 L 0x7488 recuento_premio
 C 0x7488 por debajo de su tope?
 L 0x748E recuento_premio_pon
@@ -1836,7 +1836,7 @@ L 0x74F5 recuento_ceros
 C 0x74F6 un 0 de delante?
 L 0x7502 recuento_numero
 C 0x7503 LDIRVM
-D 0x7506 0x7552 recuento_datos      "100", "RATE", "BONUS" y los seis premios: por debajo del 50 % nada; del 60, 5000; del 70, 10000; del 80, 15000; del 90, 20000; y del 100, 30000 (el tope, el premio en centenas, el texto)
+D 0x7506 0x7552 recuento_datos      "100", "RATE", "BONUS" y los siete premios (el tope, el premio en centenas, el texto): por debajo del 50 % nada; del 50, 5000; del 60, 10000; del 70, 15000; del 80, 20000; del 90, 30000; y el septimo, 100000, al que se llega con el 100 % porque el bucle solo mira seis
 L 0x7552 letras_sprites            B letras de HL (de la fuente de la BIOS) a los dibujos de sprites desde DE, de 16 en 16
 C 0x7555 la letra
 C 0x7556 su dibujo
@@ -2434,7 +2434,7 @@ L 0x659A disparo_contra_sig2
 L 0x6F62 enemigo_dispara_sig2
 L 0x7090 tocado_sig2
 L 0x74D7 recuento_linea_col
-L 0x7FB6 ram_e000_grupo
+L 0x7FB6 redoble_grupo
 C 0x7FB6 un grupo
 C 0x7FC2 el siguiente
 C 0x6486 el siguiente

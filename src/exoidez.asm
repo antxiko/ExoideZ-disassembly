@@ -4961,7 +4961,7 @@ recuento_por_ciento:
 	ld a,c			;747f
 	ld hl,07513h		;7480   ; la tabla de premios
 	ld de,00009h		;7483
-	ld b,006h		;7486   ; 6 tramos
+	ld b,006h		;7486   ; 6 tramos: con el 100 %, el septimo
 recuento_premio:
 	cp (hl)			;7488   ; por debajo de su tope?
 	jr c,recuento_premio_pon		;7489
@@ -5037,9 +5037,10 @@ recuento_numero:
 	jp 0005ch		;7503   ; LDIRVM
 
 ; ----------------------------------------------------------------------
-; DATOS recuento_datos: "100", "RATE", "BONUS" y los seis premios: por debajo
-;   del 50 % nada; del 60, 5000; del 70, 10000; del 80, 15000; del 90, 20000;
-;   y del 100, 30000 (el tope, el premio en centenas, el texto)
+; DATOS recuento_datos: "100", "RATE", "BONUS" y los siete premios (el tope,
+;   el premio en centenas, el texto): por debajo del 50 % nada; del 50, 5000;
+;   del 60, 10000; del 70, 15000; del 80, 20000; del 90, 30000; y el septimo,
+;   100000, al que se llega con el 100 % porque el bucle solo mira seis
 ;   0x7506..0x7552  (76 bytes)
 DATA_recuento_datos:
 	defb 031h,030h,030h,052h,041h,054h,045h,020h,042h,04fh,04eh,055h,053h,032h,000h,000h	; 7506  100RATE BONUS2..
@@ -5535,7 +5536,7 @@ pantalla_pon:		; La pantalla del juego: los registros del VDP (0x7907), la VRAM 
 	call vram8		;78b3
 	ld hl,07b5dh		;78b6
 	call vram8		;78b9
-	call ram_e000		;78bc   ; 0xE000-0xE090 (0x7FAE)
+	call redoble_pon		;78bc   ; la pieza de la RAM (0x7FAE)
 	call estado_nada		;78bf   ; el estado vacio
 	ld a,0e2h		;78c2   ; el registro 1 con la interrupcion del VDP (0xE2)
 	ld (0e099h),a		;78c4
@@ -6138,10 +6139,10 @@ DATA_musicas_datos:
 	defb 000h	; 7fa9
 
 ; ----------------------------------------------------------------------
-; DATOS fondo_valores: Cuatro valores (5, 3, 1, 3) para los cuatro grupos de
+; DATOS redoble_notas: Las cuatro notas (5, 3, 1, 3) de los cuatro grupos de
 ;   0x7FAE
 ;   0x7faa..0x7fae  (4 bytes)
-DATA_fondo_valores:
+DATA_redoble_notas:
 	defb 005h,003h,001h,003h	; 7faa
 
 ; ======================================================================
@@ -6149,31 +6150,32 @@ DATA_fondo_valores:
 ; ======================================================================
 
 
-ram_e000:		; 0xE000-0xE08F: cuatro grupos de 18 parejas (1, v), v de 0x7FAA; y 0xE090 = 0
-	ld de,07faah		;7fae   ; los cuatro valores
+redoble_pon:		; Una pieza de musica hecha en la RAM (0xE000): cuatro grupos de 18 notas de un cuadro (duracion 1, la nota de 0x7FAA) y el 0 del final; la lista 0x7FC7 la toca
+	ld de,07faah		;7fae   ; las cuatro notas
 	ld hl,0e000h		;7fb1   ; desde 0xE000
 	ld b,004h		;7fb4   ; cuatro grupos
-ram_e000_grupo:
+redoble_grupo:
 	push bc			;7fb6   ; un grupo
 	ld b,012h		;7fb7   ; de 18
-	ld a,(de)			;7fb9   ; el valor del grupo
+	ld a,(de)			;7fb9   ; la nota del grupo
 	inc de			;7fba
-ram_e000_pareja:
-	ld (hl),001h		;7fbb   ; 1...
+redoble_nota:
+	ld (hl),001h		;7fbb   ; duracion 1...
 	inc hl			;7fbd
-	ld (hl),a			;7fbe   ; ...y el valor
+	ld (hl),a			;7fbe   ; ...y la nota
 	inc hl			;7fbf
-	djnz ram_e000_pareja		;7fc0
+	djnz redoble_nota		;7fc0
 	pop bc			;7fc2   ; el siguiente
-	djnz ram_e000_grupo		;7fc3
-	ld (hl),b			;7fc5   ; 0xE090 = 0
+	djnz redoble_grupo		;7fc3
+	ld (hl),b			;7fc5   ; 0: el final de la pieza
 	ret			;7fc6
 
 ; ----------------------------------------------------------------------
-; DATOS datos_final: Mas listas de piezas de musica y el final del cartucho a
-;   0xFF
+; DATOS musica_lista2: La lista de piezas de la segunda voz (0x7FC7: 0x7FD3,
+;   0x7F2D... y 0xE000, la pieza de la RAM), mas notas y el final del cartucho
+;   a 0xFF
 ;   0x7fc7..0x8000  (57 bytes)
-DATA_datos_final:
+DATA_musica_lista2:
 	defb 0d3h,07fh,0ffh,0ffh,02dh,07fh,0ffh,0ffh,000h,0e0h,000h,000h,002h,001h,004h,000h	; 7fc7  ....-...........
 	defb 004h,00ah,002h,00ah,002h,001h,004h,000h,003h,00ah,024h,000h,003h,017h,006h,012h	; 7fd7  ..........$.....
 	defb 006h,011h,003h,00bh,002h,00ch,004h,000h,010h,00ch,004h,01eh,002h,01dh,010h,01eh	; 7fe7  ................
