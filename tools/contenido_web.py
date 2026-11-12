@@ -80,6 +80,9 @@ PAGINAS = [
       "the station piece by piece, the enemies, the ground targets, the capsules, the big robot and the count",
       "la estaci&oacute;n trozo a trozo, los enemigos, los blancos del suelo, las c&aacute;psulas, el robot grande "
       "y el recuento"),
+     ("THE-SPRITES.html", "LOS-SPRITES.html", "The sprites", "Los sprites",
+      "the ship, the robot, the enemies and the big robot put together from the ROM, frame by frame",
+      "la nave, el robot, los enemigos y el robot grande montados desde la ROM, cuadro a cuadro"),
      ("THE-TEXTS.html", "LOS-TEXTOS.html", "The texts", "Los textos",
       "every text in the ROM, with its translation",
       "todos los textos de la ROM, con su traducci&oacute;n"),
