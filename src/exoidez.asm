@@ -1220,7 +1220,7 @@ DATA_vida_sonido_datos:
 ; ======================================================================
 
 
-puntos_pinta:		; Las seis cifras de los puntos (0xE0AB) a los dibujos de los sprites del marcador, desde 0x3F40, de 16 en 16
+puntos_pinta:		; Las seis cifras de los puntos (0xE0AB) a los dibujos de los sprites del marcador, desde 0x3F40, de 16 en 16 (la septima, 0xE0AA, los millones, no sale)
 	ld hl,0e0abh		;4c54   ; las cifras
 	ld de,03f40h		;4c57   ; el primer dibujo
 	ld b,006h		;4c5a   ; seis

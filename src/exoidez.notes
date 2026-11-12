@@ -724,7 +724,7 @@ C 0x4C13 el 5 a 0
 C 0x4C1A volumen 15 en el canal C
 C 0x4C21 0: acabado
 D 0x4C2C 0x4C54 vida_sonido_datos   Los tonos del sonido de la vida de mas (0 al final) y las seis cifras de los puntos de cada clase (0x4C3B)
-L 0x4C54 puntos_pinta              Las seis cifras de los puntos (0xE0AB) a los dibujos de los sprites del marcador, desde 0x3F40, de 16 en 16
+L 0x4C54 puntos_pinta              Las seis cifras de los puntos (0xE0AB) a los dibujos de los sprites del marcador, desde 0x3F40, de 16 en 16 (la septima, 0xE0AA, los millones, no sale)
 C 0x4C54 las cifras
 C 0x4C57 el primer dibujo
 C 0x4C5A seis

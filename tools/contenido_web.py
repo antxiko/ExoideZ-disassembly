@@ -93,7 +93,10 @@ PAGINAS = [
       "keys 0-7 at power-on and the ship never crashes, the game in the interrupt, the status line in sprites "
       "and the seventh prize",
       "las teclas 0-7 al encender y la nave no choca, el juego en la interrupci&oacute;n, el marcador en sprites y "
-      "el s&eacute;ptimo premio")],
+      "el s&eacute;ptimo premio"),
+     ("SECRETS-AND-BUGS.html", "SECRETOS-Y-FALLOS.html", "Secrets and bugs", "Secretos y fallos",
+      "what was searched for: keys 0-7 at power-on, the controller chosen on the title, and the scoreboard that loses the million",
+      "lo que se ha buscado: las teclas 0-7 al encender, el mando que elige el t&iacute;tulo, y el marcador que pierde el mill&oacute;n")],
     [("UNDER-THE-HOOD.html", "POR-DENTRO.html", "Under the hood", "Por dentro",
       "rebuilding the ROM, the BIOS it uses, the states and the 23 tasks, the RAM and the tools",
       "rehacer la ROM, la BIOS que usa, los estados y las 23 tareas, la RAM y las herramientas")],
